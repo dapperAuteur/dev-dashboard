@@ -10,4 +10,5 @@ mongoose.connect(
   }
 );
 
+module.exports.Issue = require("./issue");
 module.exports.User = require("./user");
