@@ -1,7 +1,5 @@
 # Dev-Dashboard
 
-<hr />
-
 Dev-Dashboard is a place where developers can share and keep track of errors and issues they have come across during their development career.
 
 ![](https://res.cloudinary.com/drjonifvw/image/upload/v1550696460/dev-dashboard/Example.png)
