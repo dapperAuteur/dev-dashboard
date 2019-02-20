@@ -1,0 +1,38 @@
+.App {
+	display: flex;
+}
+
+/* body div:nth-child(2) {
+	padding-left: 75px; */
+/* } */
+
+header {
+	height: 100vh;
+	width: 150px;
+	background: lightgray;
+	position: sticky;
+	top: 0px;
+	/* position: fixed; */
+	/* transform: translateX(-75px); */
+}
+
+header div:first-child {
+	background: darkgray;
+}
+
+header > div,
+header > div:nth-child(2) {
+	text-align: center;
+	padding: 20px;
+	padding-left: 20px;
+}
+
+header div a {
+	text-decoration: none;
+	color: black;
+}
+
+header div:hover {
+	background: darkgray;
+	cursor: pointer;
+}
