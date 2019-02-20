@@ -10,5 +10,7 @@ mongoose.connect(
   }
 );
 
+module.exports.Comment = require("./comment");
 module.exports.Issue = require("./issue");
+module.exports.Tag = require("./tag");
 module.exports.User = require("./user");
