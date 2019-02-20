@@ -18,7 +18,7 @@ How to get started
 We are using MLab for our hosted database and Cloudinary to host our images
 <br />
 
-##Project #1 - Dev Dashboard Requirements
+## Project #1 - Dev Dashboard Requirements
 
 - Developers can save code notes, such as errors they've run into and how to fix them. Users will write in Markdown format.
 
