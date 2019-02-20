@@ -15,5 +15,20 @@ How to get started
 - clone repository
 - npm install
 
-<br />
 We are using MLab for our hosted database and Cloudinary to host our images
+<br />
+
+##Project #1 - Dev Dashboard Requirements
+
+- Developers can save code notes, such as errors they've run into and how to fix them. Users will write in Markdown format.
+
+- Links should be clickable when viewing
+
+- User should be able to put images. Ideally they can upload them
+
+- If you can get MDX format going, even better, but don't spend too much time on that.
+
+- Text will be saved into the database as well as into ElasticSearch which allows the user to do full text search
+- Notes include a title and save the date they were created and updated
+- Notes can individually be marked as public, and those can be viewed if you visit the user's site, e.g. devdashboard.com/users/agileflame
+- Need more complicated data schema; not all data should be nested.
