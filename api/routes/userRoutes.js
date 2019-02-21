@@ -15,6 +15,7 @@ router.post("/register", (req, res) => {
   db.User.create({ username: username, password: password })
     .then(user => {
       req.session.userid = user._id;
+      user.password = "";
       return res.status(201).json({ user });
     })
     .catch(err => {
@@ -34,6 +35,7 @@ router.post("/login", (req, res) => {
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         req.session.userid = user._id;
+        user.password = "";
         return res.status(201).json({ user });
       } else {
         return res.status(404).json({ message: "Incorrect Password" });
