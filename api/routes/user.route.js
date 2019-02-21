@@ -11,15 +11,16 @@ router.get('/test', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-  db.User.create({ username: 'test789@test.com', password: 'test123' })
+  let { username, password } = req.body;
+  db.User.create({ username: username, password: password })
     .then(user => {
       req.session.userid = user._id;
-      res.status(200).json({
+      return res.status(200).json({
         message: 'user saved successfully'
       });
     })
     .catch(err => {
-      res.status(500).json({
+      return res.status(500).json({
         error: err
       });
     });
@@ -35,12 +36,25 @@ router.post('/login', (req, res) => {
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         req.session.userid = user._id;
-        res.status(200);
+        return res.status(200).json({ message: 'login successful' });
       } else {
         return res.status(404).json({ message: 'Incorrect Password' });
       }
     });
   });
+});
+
+router.get('/logout', function(req, res, next) {
+  if (req.session) {
+    // delete session object
+    req.session.destroy(function(err) {
+      if (err) {
+        return next(err);
+      } else {
+        return res.status(200).json({ message: 'successfully logged out' });
+      }
+    });
+  }
 });
 
 module.exports = router;
