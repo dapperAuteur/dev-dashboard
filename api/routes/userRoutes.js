@@ -16,6 +16,7 @@ router.post("/register", (req, res) => {
     .then(user => {
       req.session.userid = user._id;
       user.password = "";
+      user.session = req.session;
       return res.status(201).json({ user });
     })
     .catch(err => {
@@ -36,6 +37,7 @@ router.post("/login", (req, res) => {
       if (isMatch) {
         req.session.userid = user._id;
         user.password = "";
+        user.session = req.session;
         return res.status(201).json({ user });
       } else {
         return res.status(404).json({ message: "Incorrect Password" });
