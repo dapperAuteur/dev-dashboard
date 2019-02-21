@@ -3,7 +3,6 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const mongoose = require("mongoose");
 const logger = require("morgan");
-const userRoutes = require("./routes/user.route");
 const express = require("express"),
   app = express();
 (cors = require("cors")), (bodyParser = require("body-parser"));
@@ -11,6 +10,7 @@ const express = require("express"),
 const commentRouters = require("./routes/commentRoutes");
 const issueRoutes = require("./routes/issueRoutes");
 const tagRoutes = require("./routes/tagRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 app.use(cors());
 app.use(logger("dev"));
