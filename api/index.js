@@ -5,6 +5,7 @@ const express = require("express"),
 
 const db = require("./models");
 
+const commentRouters = require("./routes/commentRoutes");
 const issueRoutes = require("./routes/issueRoutes");
 const tagRoutes = require("./routes/tagRoutes");
 
@@ -37,6 +38,7 @@ app.get(
 
 // end example routes
 
+app.use("/comments", commentRouters);
 app.use("/issues", issueRoutes);
 app.use("/tags", tagRoutes);
 
