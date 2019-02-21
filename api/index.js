@@ -5,6 +5,7 @@ const express = require("express"),
 
 const db = require("./models");
 
+const issueRoutes = require("./routes/issueRoutes");
 const tagRoutes = require("./routes/tagRoutes");
 
 app.use(cors());
@@ -36,6 +37,7 @@ app.get(
 
 // end example routes
 
+app.use("/issues", issueRoutes);
 app.use("/tags", tagRoutes);
 
 const PORT = process.env.PORT || 8081;
