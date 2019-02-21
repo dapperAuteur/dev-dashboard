@@ -6,7 +6,6 @@ router.get('/test', (req, res) => {
   res.json({
     message: 'user route works'
   });
-  console.log(req.session);
 });
 
 router.post('/create', (req, res) => {
@@ -18,17 +17,10 @@ router.post('/create', (req, res) => {
       });
     })
     .catch(err => {
-      console.log(err);
+      res.status(500).json({
+        error: err
+      });
     });
-});
-
-router.get('/get_all', (req, res) => {
-  db.User.find({}).then(response => {
-    console.log(response);
-    //   res.status(200).json({
-    //       Users:
-    //   })
-  });
 });
 
 module.exports = router;
