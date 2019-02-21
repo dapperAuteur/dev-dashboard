@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import '../Auth/form.css';
 
 class Register extends Component {
@@ -17,7 +18,21 @@ class Register extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
+
+    let { username, password } = this.state;
+    let user = {
+      username,
+      password
+    };
+
+    axios
+      .post('http://localhost:8081/auth/register', user)
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
   render() {
