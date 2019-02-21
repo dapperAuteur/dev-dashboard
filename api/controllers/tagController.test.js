@@ -10,5 +10,6 @@ console.log("tagController");
 describe("Tag", () => {
   it("confirm tests are working", () => {
     expect(1).to.equal(1);
+    expect(1).to.equal(2);
   });
 });

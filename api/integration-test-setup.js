@@ -7,7 +7,7 @@ beforeEach(() => {
       useNewUrlParser: true
     })
     .then(() => {
-      return mongoose.connection.db.collection("comments").deleteMany();
+      return mongoose.connection.db.collection("tags").deleteMany();
     })
     .catch(error => {
       console.error("Error connecting to db", error);
