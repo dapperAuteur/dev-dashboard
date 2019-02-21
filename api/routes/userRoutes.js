@@ -15,10 +15,6 @@ router.post("/register", (req, res) => {
   db.User.create({ username: username, password: password })
     .then(user => {
       req.session.userid = user._id;
-      // console.log("req.session");
-      // console.log(req.session);
-      // console.log("user");
-      // console.log(user);
       return res.status(201).json({ user });
     })
     .catch(err => {
