@@ -1,20 +1,12 @@
-.App {
-  display: flex;
-}
-
-/* body div:nth-child(2) {
-	padding-left: 75px; */
-/* } */
-
 header {
   height: 100vh;
-  width: 200px;
+  width: 280px;
   background: #1a2d5f;
   position: sticky;
   top: 0px;
   display: flex;
   flex-direction: column;
-  align-content: space-between;
+  justify-content: space-between;
   .search {
     display: block;
     width: 80%;
@@ -27,5 +19,27 @@ header {
     ::placeholder {
       color: #aaa;
     }
+  }
+  .filter {
+    margin: 0 50px;
+    color: white;
+    font-size: 1.3em;
+    h3 {
+      font-size: 1.3em;
+      cursor: default;
+    }
+    ul {
+      margin: 15px 0 0 15px;
+      li {
+        margin: 5px 0;
+        cursor: pointer;
+      }
+    }
+  }
+  img {
+    border-radius: 50%;
+    height: 160px;
+    margin: 20px auto;
+    background: white;
   }
 }
