@@ -1,0 +1,31 @@
+.App {
+  display: flex;
+}
+
+/* body div:nth-child(2) {
+	padding-left: 75px; */
+/* } */
+
+header {
+  height: 100vh;
+  width: 200px;
+  background: #1a2d5f;
+  position: sticky;
+  top: 0px;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  .search {
+    display: block;
+    width: 80%;
+    margin: 20px auto;
+    background: transparent;
+    border: 1px solid #005ac3;
+    color: white;
+    font-size: 25px;
+    padding: 2px 10px;
+    ::placeholder {
+      color: #aaa;
+    }
+  }
+}

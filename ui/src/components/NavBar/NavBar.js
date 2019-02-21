@@ -1,13 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./navbar.css";
+import "./navbar.scss";
 import { connect } from "react-redux";
+import Search from "../Search/Search";
 
 const NavBar = props => {
   return (
     <header>
-      <input type="text" className="search" placeholder="Search" />
-      <div className="user">{props.user.image}</div>
+      <Search />
+
+      <div className="filter">{/* {props.tags} */}</div>
+
+      <img className="user" src={props.user ? props.user.image : "http://http.cat/400"} />
     </header>
   );
 };
