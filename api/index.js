@@ -8,8 +8,6 @@ const express = require('express'),
   app = express();
 (cors = require('cors')), (bodyParser = require('body-parser'));
 
-// const db = require('./models');
-
 app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
