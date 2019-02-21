@@ -4,7 +4,7 @@
   "description": "tool to allow developers to save code notes, such as errors they've run into and how to fix them",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon --exec 'mocha --file \"./../integration-test-setup.js\" \"**/*.test.js\"'",
+    "test": "nodemon --exec 'mocha --file integration-test-setup.js \"**/*.test.js\"'",
     "startServer": "nodemon index.js"
   },
   "repository": {
