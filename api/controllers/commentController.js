@@ -4,30 +4,30 @@ const Comment = db.Comment;
 exports.getComments = function(req, res) {
   Comment.find()
     .then(function(comments) {
-      res.json(comments);
+      res.json({ comments });
     })
     .catch(function(err) {
-      res.json(err);
+      res.json({ error: err });
     });
 };
 
 exports.getComment = function(req, res) {
   Comment.findById(req.params.commentId)
     .then(function(foundComment) {
-      res.json(foundComment);
+      res.json({ foundComment });
     })
     .catch(function(err) {
-      res.json(err);
+      res.json({ error: err });
     });
 };
 
 exports.createComment = function(req, res) {
   Comment.create(req.body)
     .then(function(newComment) {
-      res.status(201).json(newComment);
+      res.status(201).json({ newComment });
     })
     .catch(function(err) {
-      res.json(err);
+      res.json({ error: err });
     });
 };
 
@@ -36,10 +36,10 @@ exports.updateComment = function(req, res) {
     new: true
   })
     .then(function(updatedComment) {
-      res.status(201).json(updatedComment);
+      res.status(201).json({ updatedComment });
     })
     .catch(function(err) {
-      res.json(err);
+      res.json({ error: err });
     });
 };
 
@@ -51,7 +51,7 @@ exports.deleteComment = function(req, res) {
         .json({ message: `comment with ${req.params.commentId} deleted` });
     })
     .catch(function(err) {
-      res.json(err);
+      res.json({ error: err });
     });
 };
 
