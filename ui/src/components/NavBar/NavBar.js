@@ -1,8 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./navbar.scss";
-import { connect } from "react-redux";
-import Search from "../Search/Search";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faSignInAlt,
+  faUserPlus,
+  faUser
+} from '@fortawesome/free-solid-svg-icons';
+import './navbar.scss';
+import { connect } from 'react-redux';
+import Search from '../Search/Search';
 
 const NavBar = props => {
   return (
@@ -11,6 +17,26 @@ const NavBar = props => {
 
       <div className="filter">
         {/* {props.tags} */}
+        <ul>
+          <li>
+            <NavLink className="navlink" to="/signin">
+              Sign in{' '}
+              <span>
+                <FontAwesomeIcon icon={faSignInAlt} />
+              </span>
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink className="navlink" to="/signup">
+              Sign up{' '}
+              <span>
+                <FontAwesomeIcon icon={faUserPlus} />
+              </span>
+            </NavLink>
+          </li>
+        </ul>
+        <br />
         <h3>Language</h3>
         <ul>
           <li>Javascript</li>
@@ -26,7 +52,10 @@ const NavBar = props => {
         </ul>
       </div>
 
-      <img className="user" src={props.user ? props.user.image : "http://robohash.org/chris"} />
+      <img
+        className="user"
+        src={props.user ? props.user.image : 'http://robohash.org/chris'}
+      />
     </header>
   );
 };

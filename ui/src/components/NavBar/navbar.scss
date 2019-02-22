@@ -1,7 +1,7 @@
 header {
   height: 100vh;
   width: 280px;
-  background: #1a2d5f;
+  background: #1f618d;
   position: sticky;
   top: 0px;
   display: flex;
@@ -41,5 +41,16 @@ header {
     height: 160px;
     margin: 20px auto;
     background: white;
+  }
+
+  .navlink {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .navlink:hover {
+    color: #939ca1;
+    text-decoration: none;
   }
 }
