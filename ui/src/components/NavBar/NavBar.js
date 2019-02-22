@@ -1,11 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faSignInAlt,
-  faUserPlus,
-  faUser
-} from '@fortawesome/free-solid-svg-icons';
+import { faSignInAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import './navbar.scss';
 import { connect } from 'react-redux';
 import Search from '../Search/Search';

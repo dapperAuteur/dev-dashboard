@@ -1,0 +1,1 @@
+export const VERIFIED_USER = 'VERIFIED_USER';
