@@ -9,14 +9,6 @@ exports.getTags = function(req, res) {
     .catch(function(err) {
       res.json({ error: err });
     });
-  /*
-    res.json([
-      { time: Date.now() },
-      { tagName: "javaScript", tagDescription: "what am I about" },
-      { tagName: "ReactJS", tagDescription: "Am I a framework or library?" },
-      { tagName: "recursion", tagDescription: "are you looking for recursion" }
-    ]);
-  */
 };
 
 exports.getTag = function(req, res) {
@@ -38,11 +30,6 @@ exports.createTag = function(req, res) {
     .catch(function(err) {
       res.json({ error: err });
     });
-  // let newTag = req.body;
-  // newTag.tagName = "new tag";
-  // newTag.tagDescription = "what am I about";
-  // console.log("newTag", newTag);
-  // res.json(newTag);
 };
 
 exports.updateTag = function(req, res) {
