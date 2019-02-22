@@ -9,8 +9,8 @@ import Login from './components/Auth/login';
 
 export default (
   <Switch>
-    <Route path="/register" component={Register} />
-    <Route path="/login" component={Login} />
+    <Route path="/signup" component={Register} />
+    <Route path="/signin" component={Login} />
     <Route
       path="/"
       render={() => (
