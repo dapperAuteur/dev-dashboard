@@ -1,1 +1,17 @@
 @import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+/* 
+.vertical-center {
+  display: flex;
+  align-items: center;
+} */
+
+.user-box {
+  width: 80%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-gap: 10px;
+  justify-items: center;
+  align-items: center;
+}

@@ -39,6 +39,7 @@ class Register extends Component {
     return (
       <div>
         <h3>Register</h3>
+
         <form>
           <div className="form-group">
             <label for="exampleInputEmail1">Username:</label>
@@ -65,7 +66,7 @@ class Register extends Component {
           <button
             onClick={this.handleSubmit}
             type="submit"
-            className="btn btn-primary"
+            className="btn btn-primary "
           >
             Submit
           </button>
