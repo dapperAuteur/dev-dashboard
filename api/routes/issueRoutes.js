@@ -1,35 +1,15 @@
 const express = require("express");
 const router = express.Router();
+const issueController = require("./../controllers/issueController");
 
-router.get("/", function(req, res) {
-  let issues = ["array", "of", "issues"];
-  res.json(issues);
-});
+router.get("/", issueController.getIssues);
 
-router.get("/:issueId", function(req, res) {
-  let issue = {
-    issueDescription: "description of issue",
-    resolved: false,
-    public: true,
-    issueImages: "string to image",
-    currentUserId: 2,
-    tags: [23, 32, 53]
-  };
-  res.json({ issue });
-});
+router.get("/:issueId", issueController.getIssue);
 
-router.post("/", function(req, res) {
-  let newIssue = req.body.newIssue; //body should contain object with name `newIssue`
-  res.json(newIssue);
-});
+router.post("/", issueController.createIssue);
 
-router.put("/:issueId", function(req, res) {
-  let updatedIssue = req.body.updatedIssue; //body should contain object with name `updatedIssue`
-  res.json(updatedIssue);
-});
+router.put("/:issueId", issueController.updateIssue);
 
-router.delete("/:issueId", function(req, res) {
-  res.json({ message: "issue deleted" });
-});
+router.delete("/:issueId", issueController.deleteIssue);
 
 module.exports = router;
