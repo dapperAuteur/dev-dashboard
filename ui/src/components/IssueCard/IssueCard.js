@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./IssueCard.scss";
 
 const IssueCard = props => {
-  const { title, date, user, path, code } = props.issue;
+  const { title, date, user, path } = props.issue;
   return (
     <div className="issue-card">
       <Link to={path}>
@@ -11,7 +11,7 @@ const IssueCard = props => {
       </Link>
       <p className="date">{date}</p>
       <img src={user.image ? user.image : "http://robohash.org/placeholder"} alt="" className="issue-user-img" />
-      <div className="code">{code}</div>
+      {/* <div className="code">{}</div> */}
     </div>
   );
 };

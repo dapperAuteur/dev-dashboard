@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import "./reset.css";
+// import "./reset.css";
+import "normalize.css";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 

@@ -2,10 +2,10 @@
   width: 80%;
   min-height: 200px;
   margin: 0px auto 20px auto;
-  background: #003d84;
+  border: 1px solid #003d84;
+  border-left: 15px solid red;
   color: white;
   position: relative;
-  border: 2px dashed firebrick;
   padding: 25px;
   a {
     color: white;
