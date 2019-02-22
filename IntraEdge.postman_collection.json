@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "33eb08f1-576c-43b7-8367-82e602742ee9",
+		"name": "IntraEdge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DevDashboard",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Comments",
+							"item": [
+								{
+									"name": "POST Comments: localhost:8081/comments",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"currentUserId\": \"5c6ef8472e4ea00fd5a1deda\",\n    \"username\": \"username131\",\n    \"title\": \"comment title\",\n    \"commentDescription\": \"description of comment\"\n}"
+										},
+										"url": {
+											"raw": "localhost:8081/comments",
+											"host": [
+												"localhost"
+											],
+											"port": "8081",
+											"path": [
+												"comments"
+											]
+										},
+										"description": "POST Comments: localhost:8081/comments\n{\n    \"currentUserId\": \"5c6ef8472e4ea00fd5a1deda\",\n    \"username\": \"username131\",\n    \"title\": \"comment title\",\n    \"commentDescription\": \"description of comment\"\n}"
+									},
+									"response": []
+								},
+								{
+									"name": "GET Comments: localhost:8081/comments",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"currentUserId\": \"5c6ef8472e4ea00fd5a1deda\",\n    \"username\": \"username131\",\n    \"title\": \"comment title\",\n    \"commentDescription\": \"description of comment\"\n}"
+										},
+										"url": {
+											"raw": "localhost:8081/comments",
+											"host": [
+												"localhost"
+											],
+											"port": "8081",
+											"path": [
+												"comments"
+											]
+										},
+										"description": "GET Comments: localhost:8081/comments"
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Auth Register User localhost:8081/auth/register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"username\": \"username1\", \"password\": \"password\" }"
+								},
+								"url": {
+									"raw": "localhost:8081/auth/register",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"auth",
+										"register"
+									]
+								},
+								"description": "object to register user { \"username\": \"username1\", \"password\": \"password\" }"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Test auth router localhost:8081/auth/test",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"updated comment title \",\n    \"commentDescription\": \"updated description of comment\"\n  }"
+				},
+				"url": {
+					"raw": "localhost:8081/auth/test",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"auth",
+						"test"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

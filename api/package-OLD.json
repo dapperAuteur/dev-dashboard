@@ -4,7 +4,7 @@
   "description": "tool to allow developers to save code notes, such as errors they've run into and how to fix them",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch",
+    "test": "nodemon --exec 'mocha --file integration-test-setup.js \"**/*.test.js\"'",
     "startServer": "nodemon index.js"
   },
   "repository": {
@@ -42,10 +42,5 @@
     "chai": "4.2.0",
     "jest": "24.1.0",
     "mocha": "6.0.1"
-  },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "/node_modules"
-    ]
   }
 }
