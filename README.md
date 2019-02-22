@@ -6,17 +6,25 @@ Dev-Dashboard is a place where developers can share and keep track of errors and
 
 The project uses the MERN Stack and touches on REST APIs, User Sessions, MongoDB, Password Hashing,
 
-On the front end, we are using React and Redux
+On the front end, we are using React and Redux.
+The back end, we are using Node, Express, and MongoDB with Mongoose.
+This one directory contains two subdirectories that hold the front end (ui directory) and the back end (api directory).
+You'll need to run `npm install` in each directory.
 
 <hr />
 <br/>
 How to get started
 
 - clone repository
-- npm install
+- `cd dev-dashboard/api && npm install`
+- `cd /../../dev-dashboard/ui && npm install`
 
 We are using MLab for our hosted database and Cloudinary to host our images
 <br />
+
+Please see the `.tempenv` file to see how to set up your `.env` file. You'll need to create your own variable values.
+
+Please see the `./sketch` directory to see sample images describing the UI/UX and workflow.
 
 ## Project #1 - Dev Dashboard Requirements
 
