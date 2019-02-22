@@ -63,11 +63,12 @@ class AddIssue extends Component {
         </div>
         <div className="preview-area">
           <textarea
-            name="add"
+            name="issue"
             id=""
             cols="80"
-            rows="35"
+            rows="25"
             placeholder="# Enter Markdown Here"
+            autocomplete="off"
             onChange={e => {
               this.setState({ markdown: e.target.value });
             }}

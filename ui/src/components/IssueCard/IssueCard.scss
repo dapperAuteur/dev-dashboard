@@ -2,7 +2,7 @@
   width: 80%;
   min-height: 200px;
   margin: 0px auto 20px auto;
-  border: 1px solid #003d84;
+  border: 1px solid white;
   border-left: 15px solid red;
   color: white;
   position: relative;
@@ -11,7 +11,7 @@
     color: white;
     text-decoration: none;
     &:visited {
-      color: darkorchid;
+      color: rgb(206, 108, 255);
     }
   }
   .title {

@@ -7,17 +7,18 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   .search {
     display: block;
     width: 80%;
     margin: 20px auto;
     background: transparent;
-    border: 1px solid #005ac3;
+    border: 1px solid white;
     color: white;
     font-size: 25px;
     padding: 2px 10px;
-    ::placeholder {
-      color: #aaa;
+    &::placeholder {
+      color: #eee;
     }
   }
   .filter {

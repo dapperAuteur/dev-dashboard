@@ -1,3 +1,5 @@
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
 html {
   box-sizing: border-box;
 }
@@ -9,9 +11,5 @@ html {
 
 .App {
   display: flex;
-}
-
-body {
-  background: #001e38;
-  font-family: sans-serif;
+  background: #154360;
 }
