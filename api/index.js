@@ -10,6 +10,7 @@ const express = require("express"),
 const commentRouters = require("./routes/commentRoutes");
 const issueRoutes = require("./routes/issueRoutes");
 const tagRoutes = require("./routes/tagRoutes");
+const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 
 app.use(cors());
@@ -18,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   session({
-    secret: process.env.SECRET,
+    secret: process.env.SECRET_KEY,
     // secret: "2IwaY_p%a[M=`HJ8yDa.b#xpl8XKC~",
     //set up for session persistance
     store: new MongoStore({
@@ -59,10 +60,11 @@ app.get(
 
 // end example routes
 
-app.use("/auth", userRoutes);
+app.use("/auth", authRoutes);
 app.use("/comments", commentRouters);
 app.use("/issues", issueRoutes);
 app.use("/tags", tagRoutes);
+app.use("/user", userRoutes);
 // app.use('/user', userRoutes); // to be used by admins to manage users
 
 const PORT = process.env.PORT || 8081;

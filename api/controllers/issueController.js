@@ -1,4 +1,4 @@
-const db = require("./../models");
+const db = require('./../models');
 const Issue = db.Issue;
 
 exports.getIssues = function(req, res) {
