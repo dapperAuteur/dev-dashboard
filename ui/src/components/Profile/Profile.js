@@ -18,12 +18,9 @@ export default class Profile extends Component {
   }
 
   newName = val => {
-    this.setState(
-      {
-        name: val
-      },
-      () => console.log(this.state.name)
-    );
+    this.setState({
+      name: val
+    });
   };
 
   onImageDrop(file) {
