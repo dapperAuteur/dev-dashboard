@@ -4,13 +4,13 @@ const router = express.Router();
 
 router
   .route("/")
-  .get("/", commentsController.getComments)
-  .post("/", commentsController.createComment);
+  .get(commentsController.getComments)
+  .post(commentsController.createComment);
 
 router
   .route("/:commentId")
-  .get("/:commentId", commentsController.getComment)
-  .put("/:commentId", commentsController.updateComment)
-  .delete("/:commentId", commentsController.deleteComment);
+  .get(commentsController.getComment)
+  .put(commentsController.updateComment)
+  .delete(commentsController.deleteComment);
 
 module.exports = router;

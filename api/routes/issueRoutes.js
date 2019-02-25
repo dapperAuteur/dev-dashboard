@@ -4,13 +4,13 @@ const issueController = require("./../controllers/issueController");
 
 router
   .route("/")
-  .get("/", issueController.getIssues)
-  .post("/", issueController.createIssue);
+  .get(issueController.getIssues)
+  .post(issueController.createIssue);
 
 router
   .route("/:issueId")
-  .get("/:issueId", issueController.getIssue)
-  .put("/:issueId", issueController.updateIssue)
-  .delete("/:issueId", issueController.deleteIssue);
+  .get(issueController.getIssue)
+  .put(issueController.updateIssue)
+  .delete(issueController.deleteIssue);
 
 module.exports = router;
