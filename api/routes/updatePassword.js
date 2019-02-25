@@ -20,7 +20,7 @@ router.post('/', verifyAuth, async (req, res) => {
   try {
     await user.save();
     res.status(201).json(token);
-  } catch {
+  } catch (ex) {
     res.status(500).json({ error: 'Something went wrong at sever side' });
   }
 });

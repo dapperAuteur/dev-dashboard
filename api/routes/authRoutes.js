@@ -22,7 +22,7 @@ router.post('/register', async (req, res) => {
   try {
     await user.save();
     res.status(201).json(token);
-  } catch {
+  } catch (ex) {
     res.status(500).json({ error: 'something went wrong on server side' });
   }
 });
