@@ -7,32 +7,20 @@ const express = require("express"),
   app = express();
 (cors = require("cors")), (bodyParser = require("body-parser"));
 
-const commentRouters = require("./routes/commentRoutes");
-const issueRoutes = require("./routes/issueRoutes");
-const tagRoutes = require("./routes/tagRoutes");
-const authRoutes = require("./routes/authRoutes");
-const userRoutes = require("./routes/userRoutes");
+
+const commentRouters = require('./routes/commentRoutes');
+const issueRoutes = require('./routes/issueRoutes');
+const tagRoutes = require('./routes/tagRoutes');
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+const updatePassword = require('./routes/updatePassword');
+
 
 app.use(cors());
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(
-  session({
-    secret: process.env.SECRET,
-    //set up for session persistance
-    store: new MongoStore({
-      mongooseConnection: mongoose.connection,
-      ttl: 2 * 24 * 60 * 60
-    }),
-    //forces session to be saved back to the session store,
-    //even if the session was never modified during the request.
-    resave: false,
-    //if user does not add anything to session during visit
-    //no session created
-    saveUninitialized: false
-  })
-);
+
 
 // start example route
 const cb0 = function(req, res, next) {
@@ -57,6 +45,7 @@ app.get(
   }
 );
 
+app.use('/updatePassword', updatePassword);
 // end example routes
 
 app.use("/api/ver0001/auth", authRoutes);
