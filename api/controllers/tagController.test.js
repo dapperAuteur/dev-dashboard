@@ -1,4 +1,3 @@
-const Tag = require("./../models/tag");
 const tagController = require("./tagController");
 jest.mock("./tagController");
 
@@ -12,6 +11,17 @@ describe("Create Tag", () => {
     tagDescription: "tag description"
   };
 
+  const req = {
+    currentUserId: '',
+    body: {
+      session: "",
+      tag: {
+        tagName: "tag name",
+        tagDescription: "tag description"
+      }
+    }
+  }
+
   const newTag = tag;
   res = newTag;
   res.status = function() {
@@ -21,6 +31,10 @@ describe("Create Tag", () => {
   it("creates a Tag", () => {
     return tagController.createTag().then(res => expect(res).toEqual(newTag));
   });
+  it('confirms user is authenticated and has valid session to create tag', () => {
+    // return tagController.createTag().then(res => expect(req.))
+    expect(req).
+  })
   it("returns status code 201", () => {
     return tagController
       .createTag()

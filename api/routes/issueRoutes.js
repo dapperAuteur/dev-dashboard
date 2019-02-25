@@ -2,14 +2,15 @@ const express = require("express");
 const router = express.Router();
 const issueController = require("./../controllers/issueController");
 
-router.get("/", issueController.getIssues);
+router
+  .route("/")
+  .get("/", issueController.getIssues)
+  .post("/", issueController.createIssue);
 
-router.get("/:issueId", issueController.getIssue);
-
-router.post("/", issueController.createIssue);
-
-router.put("/:issueId", issueController.updateIssue);
-
-router.delete("/:issueId", issueController.deleteIssue);
+router
+  .route("/:issueId")
+  .get("/:issueId", issueController.getIssue)
+  .put("/:issueId", issueController.updateIssue)
+  .delete("/:issueId", issueController.deleteIssue);
 
 module.exports = router;
