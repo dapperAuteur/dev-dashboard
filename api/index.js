@@ -7,20 +7,17 @@ const express = require("express"),
   app = express();
 (cors = require("cors")), (bodyParser = require("body-parser"));
 
-
-const commentRouters = require('./routes/commentRoutes');
-const issueRoutes = require('./routes/issueRoutes');
-const tagRoutes = require('./routes/tagRoutes');
-const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
-const updatePassword = require('./routes/updatePassword');
-
+const commentRouters = require("./routes/commentRoutes");
+const issueRoutes = require("./routes/issueRoutes");
+const tagRoutes = require("./routes/tagRoutes");
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
+const updatePassword = require("./routes/updatePassword");
 
 app.use(cors());
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 // start example route
 const cb0 = function(req, res, next) {
@@ -44,11 +41,10 @@ app.get(
     res.send("Hello from D!");
   }
 );
-
-app.use('/updatePassword', updatePassword);
 // end example routes
 
 app.use("/api/ver0001/auth", authRoutes);
+app.use("/api/ver0001/update-password", updatePassword);
 app.use("/api/ver0001/comments", commentRouters);
 app.use("/api/ver0001/issues", issueRoutes);
 app.use("/api/ver0001/tags", tagRoutes);

@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
 router.post("/register", async (req, res) => {
+  console.log("req.body", req.body);
   let { username, password, profilePicture } = req.body;
 
   let user = await User.findOne({ username });
@@ -31,10 +32,12 @@ router.post("/login", async (req, res) => {
   let { username, password } = req.body;
   let user = await User.findOne({ username });
 
-  if (!user) return res.status(400).json({ error: "Invalid username or password" });
+  if (!user)
+    return res.status(400).json({ error: "Invalid username or password" });
 
   const validPassword = await bcrypt.compare(password, user.password);
-  if (!validPassword) return res.status(400).json({ error: "Invalid username or password" });
+  if (!validPassword)
+    return res.status(400).json({ error: "Invalid username or password" });
 
   const token = user.generateAuthToken();
   res.status(201).json(token);
