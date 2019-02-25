@@ -6,16 +6,15 @@ const verifyAuth = require('../middleware/verifyAuth');
 
 router.post('/', verifyAuth, async (req, res) => {
   const { username } = req.user;
-  const { oldpass, newpass } = req.body;
+  const { oldpass, newpass, newPicUrl } = req.body;
   const user = await User.findOne({ username });
-  console.log('user password', user.password);
-  console.log('Old pass', oldpass);
   const validPassword = await bcrypt.compare(oldpass, user.password);
   if (!validPassword)
     return res.status(400).json({ error: 'Old password is incorrect' });
 
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(newpass, salt);
+  user.profilePicture = newPicUrl;
   const token = user.generateAuthToken();
   try {
     await user.save();

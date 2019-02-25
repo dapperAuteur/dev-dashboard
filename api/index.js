@@ -1,7 +1,4 @@
 require('dotenv').config();
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
-const mongoose = require('mongoose');
 const logger = require('morgan');
 const express = require('express'),
   app = express();
@@ -12,7 +9,7 @@ const issueRoutes = require('./routes/issueRoutes');
 const tagRoutes = require('./routes/tagRoutes');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
-const updatePassword = require('./routes/updatePassword');
+const update = require('./routes/update');
 
 app.use(cors());
 app.use(logger('dev'));
@@ -43,12 +40,11 @@ app.get(
 );
 
 app.use('/auth', authRoutes);
-app.use('/updatePassword', updatePassword);
+app.use('/update', update);
 app.use('/comments', commentRouters);
 app.use('/issues', issueRoutes);
 app.use('/tags', tagRoutes);
 app.use('/user', userRoutes);
-// app.use('/user', userRoutes); // to be used by admins to manage users
 
 const PORT = process.env.PORT || 8081;
 
