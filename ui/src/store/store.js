@@ -1,10 +1,14 @@
-import { createStore, compose, applyMiddleware } from "redux";
+import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
-import rootReducer from "./authReducer";
+import authReducer from "./authReducer";
 
 const initialState = {};
 const middleware = [thunk];
 let store;
+
+const rootReducer = combineReducers({
+  authReducer
+});
 
 const ReactReduxDevTools =
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();

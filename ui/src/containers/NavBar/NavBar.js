@@ -1,12 +1,13 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignInAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import './navbar.scss';
-import { connect } from 'react-redux';
-import Search from '../Search/Search';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import "./navbar.scss";
+import { connect } from "react-redux";
+import Search from "./../../components/Search/Search";
 
 const NavBar = props => {
+  console.log("props", props);
   return (
     <header>
       <Search />
@@ -16,7 +17,7 @@ const NavBar = props => {
         <ul>
           <li>
             <NavLink className="navlink" to="/signin">
-              Sign in{' '}
+              Sign in{" "}
               <span>
                 <FontAwesomeIcon icon={faSignInAlt} />
               </span>
@@ -25,7 +26,7 @@ const NavBar = props => {
 
           <li>
             <NavLink className="navlink" to="/signup">
-              Sign up{' '}
+              Sign up{" "}
               <span>
                 <FontAwesomeIcon icon={faUserPlus} />
               </span>
@@ -50,10 +51,18 @@ const NavBar = props => {
 
       <img
         className="user"
-        src={props.user ? props.user.image : 'http://robohash.org/chris'}
+        alt="user profile"
+        src={props.user ? props.user.image : "http://robohash.org/chris"}
       />
     </header>
   );
 };
 
-export default connect(state => state.user)(NavBar);
+const mapStateToProps = state => {
+  console.log("state.authUser", state.authUser);
+  return {
+    user: state.authUser
+  };
+};
+
+export default connect(mapStateToProps)(NavBar);
