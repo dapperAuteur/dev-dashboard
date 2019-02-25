@@ -21,20 +21,6 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// userSchema.pre('save', function(next) {
-//   const user = this;
-//   if (!user.isModified('password')) return next();
-//   bcrypt.hash(user.password, 10).then(
-//     function(hashedPassword) {
-//       user.password = hashedPassword;
-//       next();
-//     },
-//     function(err) {
-//       return next(err);
-//     }
-//   );
-// });
-
 userSchema.methods.comparePassword = function(candidatePassword, next) {
   bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
     if (err) return next(err);
@@ -47,7 +33,8 @@ userSchema.methods.generateAuthToken = function() {
     {
       _id: this._id,
       username: this.username,
-      profilePicture: this.profilePicture
+      profilePicture: this.profilePicture,
+      updatedAt: this.updatedAt
     },
     process.env.SECRET_KEY
   );
@@ -56,4 +43,4 @@ userSchema.methods.generateAuthToken = function() {
 };
 
 const User = mongoose.model('User', userSchema);
-module.exports.User = User;
+module.exports = User;
