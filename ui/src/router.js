@@ -1,13 +1,13 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
 // import App from './App';
 import Issue from "./components/Issue/Issue";
 import AddIssue from "./components/AddIssue/AddIssue";
-import Home from './components/Home/Home';
-import Dashboard from './components/Dashboard/Dashboard';
-import Profile from './components/Profile/Profile';
-import Register from './components/Auth/register';
-import Login from './components/Auth/login';
+import Home from "./components/Home/Home";
+import Dashboard from "./components/Dashboard/Dashboard";
+import Profile from "./components/Profile/Profile";
+import Register from "./components/Auth/register";
+import Login from "./components/Auth/login";
 
 export default (
   <Switch>
