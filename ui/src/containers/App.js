@@ -8,7 +8,7 @@ import { logout } from "./../store/securityActions";
 import jwt_decode from "jwt-decode";
 import NavBar from "./NavBar/NavBar";
 
-import router from "./router";
+import router from "./../router";
 import store from "../store/store";
 import { SET_CURRENT_USER } from "../store/actions";
 
