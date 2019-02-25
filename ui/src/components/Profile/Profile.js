@@ -45,7 +45,15 @@ export default class Profile extends Component {
 
   submitChanges = () => {
     // if(this.state.oldPassword === )
-    // axios.post()
+    axios
+      .post("/update/", {
+        oldpass: this.state.oldPassword,
+        newpass: this.state.newPassword,
+        newPicUrl: this.state.uploadedFileCloudinaryUrl
+      })
+      .then(res => {
+        console.log(res);
+      });
   };
   render() {
     return (
