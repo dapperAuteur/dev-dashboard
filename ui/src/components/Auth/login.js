@@ -27,7 +27,8 @@ class Login extends Component {
     let { username, password } = this.state;
     let user = {
       username,
-      password
+      password,
+      profilePicture: 'URL to be added later'
     };
 
     if (username.length === 0 || password.length === 0) {
@@ -42,10 +43,11 @@ class Login extends Component {
         () => {
           axios
             .post('http://localhost:8081/auth/login', user)
-            .then(function(response) {
-              console.log(response);
+            .then(({ data: token }) => {
+              localStorage.setItem('token', token);
             })
-            .catch(function(error) {
+            .catch(ex => {
+              const { error } = ex.response.data;
               console.log(error);
             });
         }
