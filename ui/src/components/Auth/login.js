@@ -88,7 +88,7 @@ class Login extends Component {
             type="submit"
             className="mt-4 btn btn-info btn-lg"
           >
-            Submit{' '}
+            Submit
             <span>
               <FontAwesomeIcon icon={faArrowUp} />
             </span>
@@ -97,7 +97,7 @@ class Login extends Component {
           <div className="error-box mt-4">
             {!this.state.isValid ? (
               <h4 className="text-center text-danger p-2">
-                Username or password is invalid, please try again{' '}
+                Username or password is invalid, please try again
                 <span>
                   <FontAwesomeIcon icon={faExclamationCircle} />
                 </span>

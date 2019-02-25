@@ -5,7 +5,7 @@ export function isValidEmailAddress(email) {
   let dot = domain.indexOf('.');
   let domainSuffix = domain.slice(dot + 1);
 
-  if (atCharacter == -1) {
+  if (atCharacter === -1 || atCharacter === 0) {
     return false;
   }
   if (front.startsWith('.') || front.startsWith('-') || front.startsWith('#')) {

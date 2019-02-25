@@ -65,7 +65,7 @@ class Register extends Component {
           <h3 className="text-center mb-3">Register</h3>
           <form>
             <div className="form-group">
-              <label>Email:</label>
+              <label htmlFor="email">Email:</label>
               <input
                 type="text"
                 className="form-control"
@@ -101,7 +101,7 @@ class Register extends Component {
 
           <div className="error-box mt-4">
             {!this.state.isValid ? (
-              <h4 className="text-center text-danger p-2">
+              <h4 data-testid="error" className="text-center text-danger p-2">
                 Please check your inputs and please try again{' '}
                 <span>
                   <FontAwesomeIcon icon={faExclamationCircle} />
