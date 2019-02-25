@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import request from "superagent";
 import Dropzone from "react-dropzone";
 import "./Profile.scss";
+import axios from "axios";
 
 const CLOUDINARY_UPLOAD_PRESET = "ylamraku";
 const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/devdash54321/image/upload";
@@ -10,18 +11,12 @@ export default class Profile extends Component {
   constructor() {
     super();
     this.state = {
-      name: "",
-      password: "",
+      oldPassword: "",
+      newPassword: "",
       uploadedFile: null,
       uploadedFileCloudinaryUrl: ""
     };
   }
-
-  newName = val => {
-    this.setState({
-      name: val
-    });
-  };
 
   onImageDrop(file) {
     this.setState({
@@ -48,6 +43,10 @@ export default class Profile extends Component {
     });
   }
 
+  submitChanges = () => {
+    // if(this.state.oldPassword === )
+    // axios.post()
+  };
   render() {
     return (
       <div>
@@ -57,12 +56,16 @@ export default class Profile extends Component {
           <h1>Name Goes Here</h1>
         </div>
         <form className="edit-form">
-          <label>Edit Name</label>
-          <input name="name" type="text" value={this.state.name} onChange={e => this.newName(e.target.value)} />
+          <label>Old Password</label>
+          <input
+            type="password"
+            onChange={e => this.setState({ oldPassword: e.target.value }, () => console.log(this.state.oldPassword))}
+          />
           <label>New Password</label>
-          <input name="password" type="password" />
-          <label>Confirm Password</label>
-          <input />
+          <input
+            type="password"
+            onChange={e => this.setState({ newPassword: e.target.value }, () => console.log(this.state.newPassword))}
+          />
           <label>Change Photo</label>
           <Dropzone
             multiple={false}
