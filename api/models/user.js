@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema(
   {
     username: {
       type: String,
-      required: true,
-      unique: true
+      required: true
     },
     profilePicture: {
       type: String
@@ -21,19 +21,19 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-userSchema.pre('save', function(next) {
-  const user = this;
-  if (!user.isModified('password')) return next();
-  bcrypt.hash(user.password, 10).then(
-    function(hashedPassword) {
-      user.password = hashedPassword;
-      next();
-    },
-    function(err) {
-      return next(err);
-    }
-  );
-});
+// userSchema.pre('save', function(next) {
+//   const user = this;
+//   if (!user.isModified('password')) return next();
+//   bcrypt.hash(user.password, 10).then(
+//     function(hashedPassword) {
+//       user.password = hashedPassword;
+//       next();
+//     },
+//     function(err) {
+//       return next(err);
+//     }
+//   );
+// });
 
 userSchema.methods.comparePassword = function(candidatePassword, next) {
   bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
@@ -42,5 +42,18 @@ userSchema.methods.comparePassword = function(candidatePassword, next) {
   });
 };
 
+userSchema.methods.generateAuthToken = function() {
+  const token = jwt.sign(
+    {
+      _id: this._id,
+      username: this.username,
+      profilePicture: this.profilePicture
+    },
+    process.env.SECRET_KEY
+  );
+
+  return token;
+};
+
 const User = mongoose.model('User', userSchema);
-module.exports = User;
+module.exports.User = User;
