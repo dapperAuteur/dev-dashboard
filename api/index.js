@@ -20,7 +20,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   session({
     secret: process.env.SECRET_KEY,
-    // secret: "2IwaY_p%a[M=`HJ8yDa.b#xpl8XKC~",
     //set up for session persistance
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
