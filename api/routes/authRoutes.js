@@ -22,7 +22,7 @@ router.post("/register", async (req, res) => {
 
   try {
     await user.save();
-    res.status(201).json(token);
+    res.status(201).json({ token: token });
   } catch (ex) {
     res.status(500).json({ error: "something went wrong on server side" });
   }
@@ -40,7 +40,7 @@ router.post("/login", async (req, res) => {
     return res.status(400).json({ error: "Invalid username or password" });
 
   const token = user.generateAuthToken();
-  res.status(201).json(token);
+  res.status(201).json({ token: token });
 });
 
 module.exports = router;
