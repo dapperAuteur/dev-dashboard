@@ -13,12 +13,6 @@ class Profile extends Component {
     };
   }
 
-  newName = val => {
-    this.setState({
-      name: val
-    });
-  };
-
   submitChanges = e => {
     e.preventDefault();
     localStorage.getItem("token") !== undefined &&
@@ -36,9 +30,9 @@ class Profile extends Component {
           console.log(res);
         });
   };
-
   render() {
-    console.log(localStorage.getItem("token"));
+    console.log("token", localStorage.getItem("token"));
+    console.log("props picUrl", this.props.picUrl);
     return (
       <div>
         <h1>Edit Profile</h1>
