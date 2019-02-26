@@ -4,12 +4,12 @@ const express = require("express"),
   app = express();
 (cors = require("cors")), (bodyParser = require("body-parser"));
 
-const commentRouters = require('./routes/commentRoutes');
-const issueRoutes = require('./routes/issueRoutes');
-const tagRoutes = require('./routes/tagRoutes');
-const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
-const update = require('./routes/update');
+const commentRouters = require("./routes/commentRoutes");
+const issueRoutes = require("./routes/issueRoutes");
+const tagRoutes = require("./routes/tagRoutes");
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
+const updateProfileRoutes = require("./routes/updateProfileRoutes");
 
 app.use(cors());
 app.use(logger("dev"));
@@ -41,7 +41,7 @@ app.get(
 // end example route
 
 app.use("/auth", authRoutes);
-app.use("/update", update);
+app.use("/update", updateProfileRoutes);
 app.use("/comments", commentRouters);
 app.use("/issues", issueRoutes);
 app.use("/tags", tagRoutes);

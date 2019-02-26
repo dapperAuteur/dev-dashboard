@@ -19,13 +19,13 @@ class Profile extends Component {
       this.props.picUrl !== "" &&
       axios
         .post(
-          "http://localhost:8081/update/",
+          "http://localhost:8081/update",
           {
             oldpass: this.state.oldPassword,
             newpass: this.state.newPassword,
             newPicUrl: this.props.picUrl
           },
-          { headers: { "user-auth-token": localStorage.getItem("token") } }
+          { headers: { "user-auth-token": localStorage.getItem("jwtToken") } }
         )
         .then(res => {
           console.log(res);
@@ -43,9 +43,15 @@ class Profile extends Component {
         </div>
         <form onSubmit={this.submitChanges} className="edit-form">
           <label>Old Password</label>
-          <input type="password" onChange={e => this.setState({ oldPassword: e.target.value })} />
+          <input
+            type="password"
+            onChange={e => this.setState({ oldPassword: e.target.value })}
+          />
           <label>New Password</label>
-          <input type="password" onChange={e => this.setState({ newPassword: e.target.value })} />
+          <input
+            type="password"
+            onChange={e => this.setState({ newPassword: e.target.value })}
+          />
           <label>Change Photo</label>
           <Cloudinary />
           <button type="submit">SUBMIT CHANGES</button>
