@@ -18,6 +18,7 @@ class App extends Component {
   async componentDidMount() {
     const { data } = await axios.get('http://localhost:8081/tags');
     this.props.getTags(data);
+    console.log(data);
     console.log(this.props);
   }
 

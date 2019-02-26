@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const issueSchema = new mongoose.Schema(
   {
@@ -23,13 +23,13 @@ const issueSchema = new mongoose.Schema(
     },
     currentUserId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true
     },
     tags: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Tag'
+        ref: "Tag"
       }
     ]
   },
@@ -38,5 +38,5 @@ const issueSchema = new mongoose.Schema(
   }
 );
 
-const Issue = mongoose.model('Issue', issueSchema);
+const Issue = mongoose.model("Issue", issueSchema);
 module.exports = Issue;

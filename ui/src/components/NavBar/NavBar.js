@@ -43,16 +43,17 @@ const NavBar = props => {
       {props.user && <div>Hi, {props.user.name}</div>}
       <img
         className="user"
-        src={props.picUrl ? props.picUrl : 'http://robohash.org/chris'}
+        src={props.user ? props.picUrl : 'http://robohash.org/chris'}
       />
     </header>
   );
 };
 function mapStateToProps(state) {
+  console.log(state);
   return {
     user: state.user,
     picUrl: state.picUrl,
-    tags: state.tags
+    tags: state.otherReducer.tags
   };
 }
 export default connect(mapStateToProps)(NavBar);
