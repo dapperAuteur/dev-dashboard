@@ -1,19 +1,33 @@
-import React, { Component } from 'react';
-import { isValidEmailAddress } from '../../util/emailValidator';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { Component } from "react";
+import { isValidEmailAddress } from "../../util/emailValidator";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowUp,
   faExclamationCircle
-} from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
-import '../Auth/form.css';
+} from "@fortawesome/free-solid-svg-icons";
+import "../Auth/form.css";
+import { createNewUser } from "./../../actions/securityActions";
+import { connect } from "react-redux";
+import classnames from "classnames";
 
 class Register extends Component {
   state = {
-    username: '',
-    password: '',
-    isValid: true
+    username: "",
+    password: "",
+    profilePicture: "",
+    isValid: true,
+    errors: {}
   };
+
+  componentDidMount() {
+    if (this.props.security.validToken) {
+      this.props.history.push("/");
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ errors: nextProps.errors });
+  }
 
   handleChange = e => {
     let { name, value } = e.target;
@@ -25,10 +39,11 @@ class Register extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    let { username, password } = this.state;
-    let user = {
+    let { username, password, profilePicture } = this.state;
+    let newUser = {
       username,
-      password
+      password,
+      profilePicture
     };
 
     if (
@@ -45,20 +60,15 @@ class Register extends Component {
           isValid: true
         },
         () => {
-          axios
-            .post('http://localhost:8081/auth/register', user)
-            .then(function(response) {
-              console.log(response);
-            })
-            .catch(function(error) {
-              console.log(error);
-            });
+          this.props.createNewUser(newUser);
         }
       );
     }
   };
 
   render() {
+    const { errors } = this.state;
+    console.log("errors", errors);
     return (
       <div className="border register-main">
         <div className="border2">
@@ -68,23 +78,33 @@ class Register extends Component {
               <label htmlFor="email">Email:</label>
               <input
                 type="text"
-                className="form-control"
+                className={classnames("form-control form-control-lg", {
+                  "is-invalid": errors.error
+                })}
                 placeholder="Email"
                 value={this.state.username}
-                name={'username'}
+                name={"username"}
                 onChange={this.handleChange}
               />
+              {errors.error && (
+                <div className="invalid-feedback"> {errors.error}</div>
+              )}
             </div>
             <div className="form-group">
               <label>Password:</label>
               <input
                 type="password"
-                className="form-control"
+                className={classnames("form-control form-control-lg", {
+                  "is-invalid": errors.error
+                })}
                 placeholder="Password"
                 value={this.state.password}
-                name={'password'}
+                name={"password"}
                 onChange={this.handleChange}
               />
+              {errors.error && (
+                <div className="invalid-feedback"> {errors.error}</div>
+              )}
             </div>
           </form>
 
@@ -93,7 +113,7 @@ class Register extends Component {
             type="submit"
             className="mt-4 btn btn-info btn-lg"
           >
-            Submit{' '}
+            Submit{" "}
             <span>
               <FontAwesomeIcon icon={faArrowUp} />
             </span>
@@ -102,13 +122,13 @@ class Register extends Component {
           <div className="error-box mt-4">
             {!this.state.isValid ? (
               <h4 data-testid="error" className="text-center text-danger p-2">
-                Please check your inputs and please try again{' '}
+                Please check your inputs and please try again{" "}
                 <span>
                   <FontAwesomeIcon icon={faExclamationCircle} />
                 </span>
               </h4>
             ) : (
-              ''
+              ""
             )}
           </div>
         </div>
@@ -117,4 +137,12 @@ class Register extends Component {
   }
 }
 
-export default Register;
+const mapStateToProps = state => ({
+  errors: state.errors,
+  security: state.security
+});
+
+export default connect(
+  mapStateToProps,
+  { createNewUser }
+)(Register);

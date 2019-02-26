@@ -1,18 +1,32 @@
-import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowUp,
   faExclamationCircle
-} from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
-import '../Auth/form.css';
+} from "@fortawesome/free-solid-svg-icons";
+import "../Auth/form.css";
+import { login } from "./../../actions/securityActions";
+import { connect } from "react-redux";
+import classnames from "classnames";
 
 class Login extends Component {
   state = {
-    username: '',
-    password: '',
-    isValid: true
+    username: "",
+    password: "",
+    isValid: true,
+    errors: {}
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.security.validToken) {
+      this.props.history.push("/dashboard");
+    }
+    if (nextProps.errors) {
+      // console.log(nextProps);
+      // console.log(nextProps.errors);
+      this.setState({ errors: nextProps.errors });
+    }
+  }
 
   handleChange = e => {
     let { name, value } = e.target;
@@ -23,14 +37,12 @@ class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-
     let { username, password } = this.state;
-    let user = {
+    let loginRequest = {
       username,
-      password,
-      profilePicture: 'URL to be added later'
+      password
     };
-
+    // console.log("loginRequest", loginRequest);
     if (username.length === 0 || password.length === 0) {
       this.setState({
         isValid: false
@@ -41,21 +53,15 @@ class Login extends Component {
           isValid: true
         },
         () => {
-          axios
-            .post('http://localhost:8081/auth/login', user)
-            .then(({ data: token }) => {
-              localStorage.setItem('token', token);
-            })
-            .catch(ex => {
-              const { error } = ex.response.data;
-              console.log(error);
-            });
+          this.props.login(loginRequest);
         }
       );
     }
   };
 
   render() {
+    const { errors } = this.state;
+    console.log("errors", errors);
     return (
       <div className="border register-main">
         <div className="border2">
@@ -65,23 +71,33 @@ class Login extends Component {
               <label>Email:</label>
               <input
                 type="text"
-                className="form-control"
+                className={classnames("form-control form-control-lg", {
+                  "is-invalid": errors.error
+                })}
                 placeholder="Email"
                 value={this.state.username}
-                name={'username'}
+                name={"username"}
                 onChange={this.handleChange}
               />
+              {errors.error && (
+                <div className="invalid-feedback"> {errors.error}</div>
+              )}
             </div>
             <div className="form-group">
               <label>Password:</label>
               <input
                 type="password"
-                className="form-control"
+                className={classnames("form-control form-control-lg", {
+                  "is-invalid": errors.error
+                })}
                 placeholder="Password"
                 value={this.state.password}
-                name={'password'}
+                name={"password"}
                 onChange={this.handleChange}
               />
+              {errors.error && (
+                <div className="invalid-feedback"> {errors.error}</div>
+              )}
             </div>
           </form>
 
@@ -105,7 +121,7 @@ class Login extends Component {
                 </span>
               </h4>
             ) : (
-              ''
+              ""
             )}
           </div>
         </div>
@@ -114,4 +130,11 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+  errors: state.errors,
+  security: state.security
+});
+export default connect(
+  mapStateToProps,
+  { login }
+)(Login);
