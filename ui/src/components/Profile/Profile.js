@@ -45,7 +45,7 @@ export default class Profile extends Component {
           <img src="http://robohash.org/chris" width={50} />
           <h1>Name Goes Here</h1>
         </div>
-        <form className="edit-form">
+        <form onSubmit={this.submitChanges} className="edit-form">
           <label>Edit Name</label>
           <input name="name" type="text" value={this.state.name} onChange={e => this.newName(e.target.value)} />
           <label>New Password</label>
@@ -54,7 +54,7 @@ export default class Profile extends Component {
           <input />
           <label>Change Photo</label>
           <Cloudinary />
-          <button>SUBMIT CHANGES</button>
+          <button type="submit">SUBMIT CHANGES</button>
         </form>
       </div>
     );
