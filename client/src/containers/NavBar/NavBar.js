@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, BrowserRouter as Router } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import "./navbar.scss";
@@ -14,25 +14,27 @@ const NavBar = props => {
 
       <div className="filter">
         {/* {props.tags} */}
-        <ul>
-          <li>
-            <NavLink className="navlink" to="/sign-in">
-              Sign in{" "}
-              <span>
-                <FontAwesomeIcon icon={faSignInAlt} />
-              </span>
-            </NavLink>
-          </li>
+        <Router>
+          <ul>
+            <li>
+              <NavLink className="navlink" to="/sign-in">
+                Sign in{" "}
+                <span>
+                  <FontAwesomeIcon icon={faSignInAlt} />
+                </span>
+              </NavLink>
+            </li>
 
-          <li>
-            <NavLink className="navlink" to="/sign-up">
-              Sign up{" "}
-              <span>
-                <FontAwesomeIcon icon={faUserPlus} />
-              </span>
-            </NavLink>
-          </li>
-        </ul>
+            <li>
+              <NavLink className="navlink" to="/sign-up">
+                Sign up{" "}
+                <span>
+                  <FontAwesomeIcon icon={faUserPlus} />
+                </span>
+              </NavLink>
+            </li>
+          </ul>
+        </Router>
         <br />
         <h3>Language</h3>
         <ul>

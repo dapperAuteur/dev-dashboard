@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_LOGOUT, SET_CURRENT_USER } from "./actions";
+import { SET_CURRENT_USER } from "../actions/types";
 
 const INITIAL_STATE = {
   validToken: false,
@@ -13,7 +13,7 @@ const booleanActionPayload = payload => {
   }
 };
 
-const authReducer = (state = INITIAL_STATE, action) => {
+export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
     case SET_CURRENT_USER:
       return {
@@ -21,13 +21,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
         validToken: booleanActionPayload(action.payload),
         user: action.payload
       };
-    case USER_LOGIN:
-      return { ...state, user: action.payload };
-    case USER_LOGOUT:
-      return { ...state, user: {} };
     default:
       return state;
   }
-};
-
-export default authReducer;
+}

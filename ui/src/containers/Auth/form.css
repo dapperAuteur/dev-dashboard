@@ -1,0 +1,38 @@
+/* 
+.vertical-center {
+  display: flex;
+  align-items: center;
+} */
+
+.register-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #154360;
+  color: white;
+  height: 100vh;
+  width: 100%;
+}
+
+.border2 {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  margin: auto;
+}
+
+.invalid {
+  border: solid 2px red;
+}
+
+.error-box {
+  height: 50px;
+}
+
+/* .button:focus {
+  outline: 0;
+} */
