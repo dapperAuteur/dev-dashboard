@@ -1,12 +1,13 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import "./navbar.scss";
-import { connect } from "react-redux";
-import Search from "../Search/Search";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignInAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import './navbar.scss';
+import { connect } from 'react-redux';
+import Search from '../Search/Search';
 
 const NavBar = props => {
+  console.log(props);
   return (
     <header>
       <Search />
@@ -16,7 +17,7 @@ const NavBar = props => {
         <ul>
           <li>
             <NavLink className="navlink" to="/signin">
-              Sign in{" "}
+              Sign in{' '}
               <span>
                 <FontAwesomeIcon icon={faSignInAlt} />
               </span>
@@ -25,7 +26,7 @@ const NavBar = props => {
 
           <li>
             <NavLink className="navlink" to="/signup">
-              Sign up{" "}
+              Sign up{' '}
               <span>
                 <FontAwesomeIcon icon={faUserPlus} />
               </span>
@@ -35,27 +36,24 @@ const NavBar = props => {
         <br />
         <h3>Language</h3>
         <ul>
-          <li>Javascript</li>
-          <li>Java</li>
-          <li>C++</li>
-        </ul>
-        <h3>Time</h3>
-        <ul>
-          <li>3hrs</li>
-          <li>6hrs</li>
-          <li>12hrs</li>
-          <li>24hrs</li>
+          {props.tags &&
+            props.tags.map(tag => <li key={tag._id}>{tag.tagName}</li>)}
         </ul>
       </div>
       {props.user && <div>Hi, {props.user.name}</div>}
-      <img className="user" src={props.user ? props.picUrl : "http://robohash.org/chris"} />
+      <img
+        className="user"
+        src={props.user ? props.picUrl : 'http://robohash.org/chris'}
+      />
     </header>
   );
 };
 function mapStateToProps(state) {
+  console.log(state);
   return {
     user: state.user,
-    picUrl: state.picUrl
+    picUrl: state.picUrl,
+    tags: state.otherReducer.tags
   };
 }
 export default connect(mapStateToProps)(NavBar);
