@@ -1,23 +1,24 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Issue = require('../models/issue');
-const Tag = require('../models/tag');
-const User = require('../models/user');
-const verifyAuth = require('../middleware/verifyAuth');
+const Issue = require("../models/issue");
+const Tag = require("../models/tag");
+const User = require("../models/user");
+const verifyAuth = require("../middleware/verifyAuth");
 
-router.get('/', async (req, res) => {
-  const issues = await Issue.find().populate('tags', 'tagName');
+router.get("/", async (req, res) => {
+  const issues = await Issue.find().populate("tags", "tagName");
   res.status(201).json(issues);
 });
 
 // Create new Issue
 // =============
-router.post('/', verifyAuth, async (req, res) => {
+router.post("/", verifyAuth, async (req, res) => {
   const { user } = req;
-  const { issueDescription, resolved, public, issueImages, tags } = req.body;
+  const { issueTitle, issueDescription, resolved, public, issueImages, tags } = req.body;
   const tagsIds = await checkTags(tags);
 
   const issue = new Issue({
+    issueTitle,
     issueDescription,
     resolved,
     public,

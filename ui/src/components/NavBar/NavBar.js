@@ -48,7 +48,7 @@ const NavBar = props => {
         </ul>
       </div>
       {props.user && <div>Hi, {props.user.name}</div>}
-      <img className="user" src={props.picUrl ? props.picUrl : "http://robohash.org/chris"} />
+      <img className="user" src={props.user ? props.picUrl : "http://robohash.org/chris"} />
     </header>
   );
 };

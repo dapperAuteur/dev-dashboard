@@ -1,0 +1,11 @@
+.upload-pic {
+  color: white;
+  border: 1px solid white;
+  padding: 10px 20px;
+  display: inline-block;
+  cursor: pointer;
+  &:active {
+    color: #aaa;
+    border-color: #aaa;
+  }
+}
