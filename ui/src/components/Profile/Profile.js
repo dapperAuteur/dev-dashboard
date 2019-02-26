@@ -43,19 +43,26 @@ export default class Profile extends Component {
     });
   }
 
-  submitChanges = () => {
-    // if(this.state.oldPassword === )
-    axios
-      .post("/update/", {
-        oldpass: this.state.oldPassword,
-        newpass: this.state.newPassword,
-        newPicUrl: this.state.uploadedFileCloudinaryUrl
-      })
-      .then(res => {
-        console.log(res);
-      });
+  submitChanges = e => {
+    e.preventDefault();
+    console.log(this.state.uploadedFileCloudinaryUrl);
+    localStorage.getItem("token") !== undefined &&
+      axios
+        .post(
+          "http://localhost:8081/update/",
+          {
+            oldpass: this.state.oldPassword,
+            newpass: this.state.newPassword,
+            newPicUrl: this.state.uploadedFileCloudinaryUrl
+          },
+          { headers: { "user-auth-token": localStorage.getItem("token") } }
+        )
+        .then(res => {
+          console.log(res);
+        });
   };
   render() {
+    console.log("token", localStorage.getItem("token"));
     return (
       <div>
         <h1>Edit Profile</h1>
@@ -63,17 +70,11 @@ export default class Profile extends Component {
           <img src="http://robohash.org/chris" width={50} />
           <h1>Name Goes Here</h1>
         </div>
-        <form className="edit-form">
+        <form onSubmit={this.submitChanges} className="edit-form">
           <label>Old Password</label>
-          <input
-            type="password"
-            onChange={e => this.setState({ oldPassword: e.target.value }, () => console.log(this.state.oldPassword))}
-          />
+          <input type="password" onChange={e => this.setState({ oldPassword: e.target.value })} />
           <label>New Password</label>
-          <input
-            type="password"
-            onChange={e => this.setState({ newPassword: e.target.value }, () => console.log(this.state.newPassword))}
-          />
+          <input type="password" onChange={e => this.setState({ newPassword: e.target.value })} />
           <label>Change Photo</label>
           <Dropzone
             multiple={false}
@@ -94,7 +95,7 @@ export default class Profile extends Component {
           ) : (
             <div className="file-name">{this.state.uploadedFile.name}</div>
           )}
-          <button>SUBMIT CHANGES</button>
+          <button type="submit">SUBMIT CHANGES</button>
         </form>
       </div>
     );

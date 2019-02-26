@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema(
   {
@@ -36,11 +36,11 @@ userSchema.methods.generateAuthToken = function() {
       profilePicture: this.profilePicture,
       updatedAt: this.updatedAt
     },
-    process.env.SECRET_KEY
+    process.env.SECRET
   );
 
   return token;
 };
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 module.exports = User;
