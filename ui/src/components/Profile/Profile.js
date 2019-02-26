@@ -16,6 +16,7 @@ class Profile extends Component {
   submitChanges = e => {
     e.preventDefault();
     localStorage.getItem("token") !== undefined &&
+      this.props.picUrl !== "" &&
       axios
         .post(
           "http://localhost:8081/update/",
