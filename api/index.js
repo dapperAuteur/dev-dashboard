@@ -9,7 +9,7 @@ const issueRoutes = require('./routes/issueRoutes');
 const tagRoutes = require('./routes/tagRoutes');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
-const update = require('./routes/updateProfileRoutes');
+const update = require('./routes/update');
 
 app.use(cors());
 app.use(logger("dev"));
