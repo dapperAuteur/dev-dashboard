@@ -26,7 +26,7 @@ class Register extends Component {
     e.preventDefault();
 
     let { username, password } = this.state;
-    let user = {
+    let newUser = {
       username,
       password
     };
@@ -46,7 +46,7 @@ class Register extends Component {
         },
         () => {
           axios
-            .post("http://localhost:8081/auth/register", user)
+            .post("http://localhost:8081/auth/register", newUser)
             .then(function(response) {
               console.log(response);
               localStorage.setItem("token", response.data.token);
