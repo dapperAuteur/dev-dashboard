@@ -5,6 +5,7 @@ import setJWTToken from "./../secureUtils/setJWTToken";
 import jwt_decode from "jwt-decode";
 
 export const createNewUser = (newUser, history) => async dispatch => {
+  console.log("newUser", newUser);
   axios
     .post("http://localhost:8081/auth/register", newUser)
     .then(function(res) {
@@ -17,10 +18,11 @@ export const createNewUser = (newUser, history) => async dispatch => {
       });
     })
     .catch(function(error) {
-      console.log(error);
+      console.log("error");
+      console.log(error.response.data);
       dispatch({
         type: GET_ERRORS,
-        payload: error.res.data
+        payload: error.response.data
       });
     });
 };
