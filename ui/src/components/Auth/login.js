@@ -6,6 +6,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import "../Auth/form.css";
+import { login } from "./../../actions/securityActions";
+import { connect } from "react-redux";
 
 class Login extends Component {
   state = {
@@ -15,7 +17,6 @@ class Login extends Component {
   };
 
   handleChange = e => {
-    // console.log("object");
     let { name, value } = e.target;
     this.setState({
       [name]: value
@@ -23,14 +24,13 @@ class Login extends Component {
   };
 
   handleSubmit = e => {
-    // console.log("object");
     e.preventDefault();
     let { username, password } = this.state;
-    let user = {
+    let loginRequest = {
       username,
       password
     };
-    console.log("user", user);
+    // console.log("loginRequest", loginRequest);
     if (username.length === 0 || password.length === 0) {
       this.setState({
         isValid: false
@@ -41,16 +41,7 @@ class Login extends Component {
           isValid: true
         },
         () => {
-          axios
-            .post("http://localhost:8081/auth/login", user)
-            .then(function(response) {
-              console.log("response", response);
-              localStorage.setItem("token", response.data.token);
-            })
-            .catch(ex => {
-              const { error } = ex.response.data;
-              console.log(error);
-            });
+          this.props.login(loginRequest);
         }
       );
     }
@@ -115,4 +106,11 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+  errors: state.errors,
+  security: state.security
+});
+export default connect(
+  mapStateToProps,
+  { login }
+)(Login);
