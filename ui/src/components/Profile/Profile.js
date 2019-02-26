@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Profile.scss";
 import Cloudinary from "../Cloudinary/Cloudinary";
+import axios from "axios";
 
 export default class Profile extends Component {
   constructor() {
@@ -15,6 +16,25 @@ export default class Profile extends Component {
     this.setState({
       name: val
     });
+  };
+
+  submitChanges = e => {
+    e.preventDefault();
+    console.log(this.state.uploadedFileCloudinaryUrl);
+    localStorage.getItem("token") !== undefined &&
+      axios
+        .post(
+          "http://localhost:8081/update/",
+          {
+            oldpass: this.state.oldPassword,
+            newpass: this.state.newPassword,
+            newPicUrl: this.state.uploadedFileCloudinaryUrl
+          },
+          { headers: { "user-auth-token": localStorage.getItem("token") } }
+        )
+        .then(res => {
+          console.log(res);
+        });
   };
 
   render() {
