@@ -14,10 +14,18 @@ router.get('/', async (req, res) => {
 // =============
 router.post('/', verifyAuth, async (req, res) => {
   const { user } = req;
-  const { issueDescription, resolved, public, issueImages, tags } = req.body;
+  const {
+    issueTitle,
+    issueDescription,
+    resolved,
+    public,
+    issueImages,
+    tags
+  } = req.body;
   const tagsIds = await checkTags(tags);
 
   const issue = new Issue({
+    issueTitle,
     issueDescription,
     resolved,
     public,
