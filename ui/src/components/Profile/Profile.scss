@@ -5,16 +5,6 @@
   flex-direction: column;
 }
 
-.upload-pic {
-  height: fit-content;
-  width: fit-content;
-  padding: 4px;
-  background: white;
-  &:hover {
-    cursor: pointer;
-  }
-}
-
 .file-name {
   height: 50px;
   width: fit-content;

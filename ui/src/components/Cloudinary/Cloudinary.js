@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import request from "superagent";
 import Dropzone from "react-dropzone";
 import { connect } from "react-redux";
-import { userPhoto } from "../../ducks/reducer";
+import { userPhoto, issuePhoto } from "../../ducks/reducer";
+import "./Cloudinary.scss";
 
 const CLOUDINARY_UPLOAD_PRESET = "ylamraku";
 const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/devdash54321/image/upload";
@@ -36,12 +37,17 @@ class Cloudinary extends Component {
         this.setState({
           uploadedFileCloudinaryUrl: res.body.secure_url
         });
-        this.props.userPhoto(res.body.secure_url);
+        if (this.props.component === "userphoto") {
+          this.props.userPhoto(res.body.secure_url);
+        } else if (this.props.component === "issuephoto") {
+          this.props.issuePhoto(res.body.secure_url);
+        }
       }
     });
   }
   render() {
     console.log(this.props.picUrl);
+    console.log(this.props);
     return (
       <div>
         <Dropzone
@@ -66,10 +72,11 @@ class Cloudinary extends Component {
 
 function mapStateToProps(state) {
   return {
-    picUrl: state.picUrl
+    picUrl: state.picUrl,
+    issuePic: state.issuePic
   };
 }
 export default connect(
   mapStateToProps,
-  { userPhoto }
+  { userPhoto, issuePhoto }
 )(Cloudinary);
