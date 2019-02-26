@@ -1,4 +1,4 @@
-import { VERIFIED_USER } from "./actions";
+// import { VERIFIED_USER } from "./actions";
 
 const INITIAL_STATE = {
   user: null,

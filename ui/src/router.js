@@ -6,8 +6,8 @@ import AddIssue from "./components/AddIssue/AddIssue";
 import Home from "./components/Home/Home";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Profile from "./components/Profile/Profile";
-import Register from "./components/Auth/register";
-import Login from "./components/Auth/login";
+import Register from "./components/Auth/Register";
+import Login from "./components/Auth/Login";
 
 export default (
   <Switch>
