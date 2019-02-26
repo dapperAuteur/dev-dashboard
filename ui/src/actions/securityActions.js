@@ -12,10 +12,12 @@ export const createNewUser = (newUser, history) => async dispatch => {
       console.log(res);
       const { token } = res.data;
       localStorage.setItem("jwtToken", token);
+      const decoded = jwt_decode(token);
       dispatch({
-        type: GET_ERRORS,
-        payload: {}
+        type: SET_CURRENT_USER,
+        payload: decoded
       });
+      this.props.history.push("/");
     })
     .catch(function(error) {
       console.log("error");
