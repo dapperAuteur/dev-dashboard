@@ -47,7 +47,7 @@ class Profile extends Component {
           <label>New Password</label>
           <input type="password" onChange={e => this.setState({ newPassword: e.target.value })} />
           <label>Change Photo</label>
-          <Cloudinary />
+          <Cloudinary component="userphoto" />
           <button type="submit">SUBMIT CHANGES</button>
         </form>
       </div>

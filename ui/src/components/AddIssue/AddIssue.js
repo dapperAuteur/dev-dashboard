@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Code from "../Code/Code";
 import "./addIssue.scss";
 import axios from "axios";
+import Cloudinary from "../Cloudinary/Cloudinary";
+import { connect } from "react-redux";
 
 class AddIssue extends Component {
   constructor(props) {
@@ -10,41 +12,57 @@ class AddIssue extends Component {
       title: "",
       markdown: "",
       tags: [],
-      search: ""
+      search: "",
+      issueImages: []
     };
   }
 
-  add = () => {
+  handleTags = val => {
+    let splitTags = val.split("#");
+    splitTags.splice(0, 1);
+    let trimTags = splitTags.map(tag => {
+      return { tagName: tag.trim() };
+    });
+    this.setState(
+      {
+        tags: trimTags
+      },
+      () => console.log(this.state.tags)
+    );
+  };
+
+  createIssue = () => {
+    let token = localStorage.getItem("token");
     axios
-      .post("http://localhost:8081/issues", {
-        newIssue: {
-          currentUserId: "this is not real",
-          issueDescription: this.state.markdown
-        }
-      })
+      .post(
+        "http://localhost:8081/issues",
+        {
+          issueTitle: this.state.title,
+          issueDescription: this.state.markdown,
+          tags: this.state.tags,
+          issueImages: [this.props.issuePic]
+        },
+        { headers: { "user-auth-token": token } }
+      )
       .then(response => {
-        if (response.status === 200) {
-          this.setState(
-            {
-              title: "Added!",
-              markdown: response.data.issueDescription
-            },
-            console.log(response)
-          );
+        console.log(response);
+        if (response.status === 201) {
+          alert("Successfully added an issue");
+        } else {
+          alert("Issue not added :(");
         }
       });
   };
-  get = () => {
-    axios.get("localhost:8081/issues", { currentUserId: "this is not real" }).then(response => {
-      if (response.status === 200) {
-        this.setState({
-          title: "Added!",
-          markdown: ""
-        });
-      }
-    });
-  };
-
+  // get = () => {
+  //   axios.get("localhost:8081/issues", { currentUserId: "this is not real" }).then(response => {
+  //     if (response.status === 200) {
+  //       this.setState({
+  //         title: "Added!",
+  //         markdown: ""
+  //       });
+  //     }
+  //   });
+  // };
   render() {
     const { title, markdown, tags, search } = this.state;
     return (
@@ -58,9 +76,6 @@ class AddIssue extends Component {
           }}
           value={title}
         />
-        <div className="add" onClick={this.add}>
-          Add
-        </div>
         <div className="preview-area">
           <textarea
             name="issue"
@@ -68,7 +83,7 @@ class AddIssue extends Component {
             cols="80"
             rows="25"
             placeholder="# Enter Markdown Here"
-            autocomplete="off"
+            autoComplete="off"
             onChange={e => {
               this.setState({ markdown: e.target.value });
             }}
@@ -78,9 +93,19 @@ class AddIssue extends Component {
             <Code markdown={markdown} />
           </div>
         </div>
+        <input placeholder="#tag #example #javascript #java" className="title" onChange={e => this.handleTags(e.target.value)} />
+        <p>Upload a photo to help describe your issue</p>
+        <Cloudinary component="issuephoto" />
+        <div className="add" onClick={this.createIssue}>
+          Create New Issue
+        </div>
       </div>
     );
   }
 }
-
-export default AddIssue;
+function mapStateToProps(state) {
+  return {
+    issuePic: state.issuePic
+  };
+}
+export default connect(mapStateToProps)(AddIssue);
