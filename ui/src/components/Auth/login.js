@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowUp,
   faExclamationCircle
-} from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
-import '../Auth/form.css';
+} from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import "../Auth/form.css";
 
 class Login extends Component {
   state = {
-    username: '',
-    password: '',
+    username: "",
+    password: "",
     isValid: true
   };
 
   handleChange = e => {
+    // console.log("object");
     let { name, value } = e.target;
     this.setState({
       [name]: value
@@ -22,15 +23,14 @@ class Login extends Component {
   };
 
   handleSubmit = e => {
+    // console.log("object");
     e.preventDefault();
-
     let { username, password } = this.state;
     let user = {
       username,
-      password,
-      profilePicture: 'URL to be added later'
+      password
     };
-
+    console.log("user", user);
     if (username.length === 0 || password.length === 0) {
       this.setState({
         isValid: false
@@ -42,9 +42,10 @@ class Login extends Component {
         },
         () => {
           axios
-            .post('http://localhost:8081/auth/login', user)
-            .then(({ data: token }) => {
-              localStorage.setItem('token', token);
+            .post("http://localhost:8081/auth/login", user)
+            .then(function(response) {
+              console.log("response", response);
+              localStorage.setItem("token", response.data.token);
             })
             .catch(ex => {
               const { error } = ex.response.data;
@@ -68,7 +69,7 @@ class Login extends Component {
                 className="form-control"
                 placeholder="Email"
                 value={this.state.username}
-                name={'username'}
+                name={"username"}
                 onChange={this.handleChange}
               />
             </div>
@@ -79,7 +80,7 @@ class Login extends Component {
                 className="form-control"
                 placeholder="Password"
                 value={this.state.password}
-                name={'password'}
+                name={"password"}
                 onChange={this.handleChange}
               />
             </div>
@@ -105,7 +106,7 @@ class Login extends Component {
                 </span>
               </h4>
             ) : (
-              ''
+              ""
             )}
           </div>
         </div>
