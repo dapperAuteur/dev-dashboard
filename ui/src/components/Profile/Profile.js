@@ -8,8 +8,8 @@ class Profile extends Component {
   constructor() {
     super();
     this.state = {
-      name: "",
-      password: ""
+      oldPassword: "",
+      newPassword: ""
     };
   }
 
@@ -38,6 +38,7 @@ class Profile extends Component {
   };
 
   render() {
+    console.log(localStorage.getItem("token"));
     return (
       <div>
         <h1>Edit Profile</h1>
@@ -46,12 +47,10 @@ class Profile extends Component {
           <h1>Name Goes Here</h1>
         </div>
         <form onSubmit={this.submitChanges} className="edit-form">
-          <label>Edit Name</label>
-          <input name="name" type="text" value={this.state.name} onChange={e => this.newName(e.target.value)} />
+          <label>Old Password</label>
+          <input type="password" onChange={e => this.setState({ oldPassword: e.target.value })} />
           <label>New Password</label>
-          <input name="password" type="password" />
-          <label>Confirm Password</label>
-          <input />
+          <input type="password" onChange={e => this.setState({ newPassword: e.target.value })} />
           <label>Change Photo</label>
           <Cloudinary />
           <button type="submit">SUBMIT CHANGES</button>
