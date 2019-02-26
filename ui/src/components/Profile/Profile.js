@@ -1,51 +1,20 @@
 import React, { Component } from "react";
-import request from "superagent";
-import Dropzone from "react-dropzone";
 import "./Profile.scss";
+import Cloudinary from "../Cloudinary/Cloudinary";
 import axios from "axios";
+import { connect } from "react-redux";
 
-const CLOUDINARY_UPLOAD_PRESET = "ylamraku";
-const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/devdash54321/image/upload";
-
-export default class Profile extends Component {
+class Profile extends Component {
   constructor() {
     super();
     this.state = {
       oldPassword: "",
-      newPassword: "",
-      uploadedFile: null,
-      uploadedFileCloudinaryUrl: ""
+      newPassword: ""
     };
-  }
-
-  onImageDrop(file) {
-    this.setState({
-      uploadedFile: file[0]
-    });
-
-    this.handleUpload(file[0]);
-  }
-
-  handleUpload(file) {
-    let upload = request
-      .post(CLOUDINARY_UPLOAD_URL)
-      .field("upload_preset", CLOUDINARY_UPLOAD_PRESET)
-      .field("file", file);
-    upload.end((err, res) => {
-      if (err) {
-        console.log("err", err);
-      }
-      if (res.body.secure_url !== "") {
-        this.setState({
-          uploadedFileCloudinaryUrl: res.body.secure_url
-        });
-      }
-    });
   }
 
   submitChanges = e => {
     e.preventDefault();
-    console.log(this.state.uploadedFileCloudinaryUrl);
     localStorage.getItem("token") !== undefined &&
       axios
         .post(
@@ -53,7 +22,7 @@ export default class Profile extends Component {
           {
             oldpass: this.state.oldPassword,
             newpass: this.state.newPassword,
-            newPicUrl: this.state.uploadedFileCloudinaryUrl
+            newPicUrl: this.props.picUrl
           },
           { headers: { "user-auth-token": localStorage.getItem("token") } }
         )
@@ -63,11 +32,12 @@ export default class Profile extends Component {
   };
   render() {
     console.log("token", localStorage.getItem("token"));
+    console.log("props picUrl", this.props.picUrl);
     return (
       <div>
         <h1>Edit Profile</h1>
         <div>
-          <img src="http://robohash.org/chris" width={50} />
+          <img src={this.props.picUrl} width={50} />
           <h1>Name Goes Here</h1>
         </div>
         <form onSubmit={this.submitChanges} className="edit-form">
@@ -76,28 +46,16 @@ export default class Profile extends Component {
           <label>New Password</label>
           <input type="password" onChange={e => this.setState({ newPassword: e.target.value })} />
           <label>Change Photo</label>
-          <Dropzone
-            multiple={false}
-            accept="image/*"
-            onDrop={this.onImageDrop.bind(this)}
-            className="fileBox"
-            uploadedFileCloudinaryUrl={this.state.uploadedFileCloudinaryUrl}
-          >
-            {({ getRootProps, getInputProps }) => (
-              <div {...getRootProps()} className="upload-pic">
-                UPLOAD
-                <input {...getInputProps()} />
-              </div>
-            )}
-          </Dropzone>
-          {this.state.uploadedFile === null ? (
-            <div className="file-name" />
-          ) : (
-            <div className="file-name">{this.state.uploadedFile.name}</div>
-          )}
+          <Cloudinary />
           <button type="submit">SUBMIT CHANGES</button>
         </form>
       </div>
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    picUrl: state.picUrl
+  };
+}
+export default connect(mapStateToProps)(Profile);
