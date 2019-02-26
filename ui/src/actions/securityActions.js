@@ -17,6 +17,7 @@ export const createNewUser = (newUser, history) => async dispatch => {
         type: SET_CURRENT_USER,
         payload: decoded
       });
+      this.props.history.push("/");
     })
     .catch(function(error) {
       console.log("error");

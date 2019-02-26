@@ -32,7 +32,7 @@ class Profile extends Component {
         });
   };
   render() {
-    console.log("token", localStorage.getItem("token"));
+    console.log("token", localStorage.getItem("jwtToken"));
     console.log("props picUrl", this.props.picUrl);
     return (
       <div>
