@@ -29,6 +29,40 @@ router.post('/', verifyAuth, async (req, res) => {
   res.status(201).json(result);
 });
 
+router.get('/:issueId', async (req, res) => {
+  const issue = await Issue.findOne({ _id: req.params.issueId });
+  res.send(issue);
+});
+
+router.put('/:issueId', verifyAuth, async (req, res) => {
+  const { user } = req;
+  const issue = req.body;
+
+  const tagsIds = await checkTags(req.body.tags);
+  issue.tags = tagsIds;
+  issue.currentUserId = user._id;
+  const newIssue = await Issue.findByIdAndUpdate(
+    {
+      _id: req.params.issueId
+    },
+    issue,
+    {
+      new: true
+    }
+  );
+
+  res.status(201).send(newIssue);
+});
+
+router.delete('/', verifyAuth, async (req, res) => {
+  try {
+    const result = await Issue.deleteOne({ _id: req.params.issueId });
+    res.status(201).json(result);
+  } catch (ex) {
+    res.status(500).json({ error: 'Something went wrong at sever side' });
+  }
+});
+
 // Check if tags already exists,
 // otherwise create new one
 // =================================
