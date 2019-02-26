@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { isValidEmailAddress } from '../../util/emailValidator';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { Component } from "react";
+import { isValidEmailAddress } from "../../util/emailValidator";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowUp,
   faExclamationCircle
-} from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
-import '../Auth/form.css';
+} from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import "../Auth/form.css";
 
 class Register extends Component {
   state = {
-    username: '',
-    password: '',
+    username: "",
+    password: "",
     isValid: true
   };
 
@@ -46,9 +46,10 @@ class Register extends Component {
         },
         () => {
           axios
-            .post('http://localhost:8081/auth/register', user)
+            .post("http://localhost:8081/auth/register", user)
             .then(function(response) {
               console.log(response);
+              localStorage.setItem("token", response.data.token);
             })
             .catch(function(error) {
               console.log(error);
@@ -71,7 +72,7 @@ class Register extends Component {
                 className="form-control"
                 placeholder="Email"
                 value={this.state.username}
-                name={'username'}
+                name={"username"}
                 onChange={this.handleChange}
               />
             </div>
@@ -82,7 +83,7 @@ class Register extends Component {
                 className="form-control"
                 placeholder="Password"
                 value={this.state.password}
-                name={'password'}
+                name={"password"}
                 onChange={this.handleChange}
               />
             </div>
@@ -93,7 +94,7 @@ class Register extends Component {
             type="submit"
             className="mt-4 btn btn-info btn-lg"
           >
-            Submit{' '}
+            Submit{" "}
             <span>
               <FontAwesomeIcon icon={faArrowUp} />
             </span>
@@ -102,13 +103,13 @@ class Register extends Component {
           <div className="error-box mt-4">
             {!this.state.isValid ? (
               <h4 data-testid="error" className="text-center text-danger p-2">
-                Please check your inputs and please try again{' '}
+                Please check your inputs and please try again{" "}
                 <span>
                   <FontAwesomeIcon icon={faExclamationCircle} />
                 </span>
               </h4>
             ) : (
-              ''
+              ""
             )}
           </div>
         </div>
