@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import "./Profile.scss";
 import Cloudinary from "../Cloudinary/Cloudinary";
 import axios from "axios";
+import { connect } from "react-redux";
 
-export default class Profile extends Component {
+class Profile extends Component {
   constructor() {
     super();
     this.state = {
@@ -20,7 +21,6 @@ export default class Profile extends Component {
 
   submitChanges = e => {
     e.preventDefault();
-    console.log(this.state.uploadedFileCloudinaryUrl);
     localStorage.getItem("token") !== undefined &&
       axios
         .post(
@@ -28,7 +28,7 @@ export default class Profile extends Component {
           {
             oldpass: this.state.oldPassword,
             newpass: this.state.newPassword,
-            newPicUrl: this.state.uploadedFileCloudinaryUrl
+            newPicUrl: this.props.picUrl
           },
           { headers: { "user-auth-token": localStorage.getItem("token") } }
         )
@@ -42,7 +42,7 @@ export default class Profile extends Component {
       <div>
         <h1>Edit Profile</h1>
         <div>
-          <img src="http://robohash.org/chris" width={50} />
+          <img src={this.props.picUrl} width={50} />
           <h1>Name Goes Here</h1>
         </div>
         <form onSubmit={this.submitChanges} className="edit-form">
@@ -60,3 +60,9 @@ export default class Profile extends Component {
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    picUrl: state.picUrl
+  };
+}
+export default connect(mapStateToProps)(Profile);
