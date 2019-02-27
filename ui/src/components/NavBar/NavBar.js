@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import Search from '../Search/Search';
 
 const NavBar = props => {
-  console.log(props);
+  const token = localStorage.getItem('jwtToken');
   return (
     <header>
       <Search />
@@ -15,23 +15,43 @@ const NavBar = props => {
       <div className="filter">
         {/* {props.tags} */}
         <ul>
-          <li>
-            <NavLink className="navlink" to="/signin">
-              Sign in{' '}
-              <span>
-                <FontAwesomeIcon icon={faSignInAlt} />
-              </span>
-            </NavLink>
-          </li>
+          {!token ? (
+            <div>
+              <li>
+                <NavLink className="navlink" to="/signin">
+                  Sign in{' '}
+                  <span>
+                    <FontAwesomeIcon icon={faSignInAlt} />
+                  </span>
+                </NavLink>
+              </li>
 
-          <li>
-            <NavLink className="navlink" to="/signup">
-              Sign up{' '}
-              <span>
-                <FontAwesomeIcon icon={faUserPlus} />
-              </span>
-            </NavLink>
-          </li>
+              <li>
+                <NavLink className="navlink" to="/signup">
+                  Sign up{' '}
+                  <span>
+                    <FontAwesomeIcon icon={faUserPlus} />
+                  </span>
+                </NavLink>
+              </li>
+            </div>
+          ) : (
+            <div>
+              <li>
+                <NavLink className="navlink" to="/add-issue">
+                  Add Issue
+                </NavLink>
+              </li>
+              <li>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => localStorage.clear()}
+                >
+                  Logout
+                </button>
+              </li>
+            </div>
+          )}
         </ul>
         <br />
         <h3>Language</h3>

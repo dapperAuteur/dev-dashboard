@@ -50,6 +50,7 @@ export function getTags(tags) {
   };
 }
 export function issuePhoto(issuePic) {
+  console.log('Issue Image', issuePic);
   return {
     type: ISSUE_PHOTO,
     payload: issuePic

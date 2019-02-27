@@ -1,24 +1,24 @@
-import React, { Component } from "react";
-import Code from "../Code/Code";
-import "./addIssue.scss";
-import axios from "axios";
-import Cloudinary from "../Cloudinary/Cloudinary";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import Code from '../Code/Code';
+import './addIssue.scss';
+import axios from 'axios';
+import Cloudinary from '../Cloudinary/Cloudinary';
+import { connect } from 'react-redux';
 
 class AddIssue extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      markdown: "",
+      title: '',
+      markdown: '',
       tags: [],
-      search: "",
+      search: '',
       issueImages: []
     };
   }
 
   handleTags = val => {
-    let splitTags = val.split("#");
+    let splitTags = val.split('#');
     splitTags.splice(0, 1);
     let trimTags = splitTags.map(tag => {
       return { tagName: tag.trim() };
@@ -32,24 +32,25 @@ class AddIssue extends Component {
   };
 
   createIssue = () => {
-    let token = localStorage.getItem("token");
+    let token = localStorage.getItem('token');
+    console.log('Issue Image', this.props.issuePic);
     axios
       .post(
-        "http://localhost:8081/issues",
+        'http://localhost:8081/issues',
         {
           issueTitle: this.state.title,
           issueDescription: this.state.markdown,
           tags: this.state.tags,
           issueImages: [this.props.issuePic]
         },
-        { headers: { "user-auth-token": token } }
+        { headers: { 'user-auth-token': token } }
       )
       .then(response => {
         console.log(response);
         if (response.status === 201) {
-          alert("Successfully added an issue");
+          this.props.history.push('/dashboard');
         } else {
-          alert("Issue not added :(");
+          alert('Issue not added :(');
         }
       });
   };
@@ -93,7 +94,11 @@ class AddIssue extends Component {
             <Code markdown={markdown} />
           </div>
         </div>
-        <input placeholder="#tag #example #javascript #java" className="title" onChange={e => this.handleTags(e.target.value)} />
+        <input
+          placeholder="#tag #example #javascript #java"
+          className="title"
+          onChange={e => this.handleTags(e.target.value)}
+        />
         <p>Upload a photo to help describe your issue</p>
         <Cloudinary component="issuephoto" />
         <div className="add" onClick={this.createIssue}>
@@ -103,6 +108,7 @@ class AddIssue extends Component {
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     issuePic: state.issuePic
