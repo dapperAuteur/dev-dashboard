@@ -65,7 +65,8 @@ function mapStateToProps(state) {
   console.log(state);
   return {
     user: state.user,
-    picUrl: state.picUrl
+    picUrl: state.picUrl,
+    tags: state.otherReducer.tags
   };
 }
 export default connect(mapStateToProps)(NavBar);

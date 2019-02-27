@@ -19,7 +19,7 @@ export default (
       path="/"
       render={() => (
         <Home>
-          <SecureRoute path="/dashboard" component={Dashboard} />
+          <Route path="/dashboard" component={Dashboard} />
           <SecureRoute path="/profile" component={Profile} />
         </Home>
       )}

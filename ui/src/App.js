@@ -2,6 +2,9 @@ import React, { Component } from "react";
 // import "./reset.css";
 import "normalize.css";
 import "./App.css";
+import { connect } from "react-redux";
+import { getTags } from "./ducks/reducer";
+import axios from "axios";
 import NavBar from "./components/NavBar/NavBar";
 import jwt_decode from "jwt-decode";
 import store from "./store";
@@ -26,6 +29,14 @@ class App extends Component {
     this.state = {};
   }
 
+  async componentDidMount() {
+    const data = await axios.get("http://localhost:8081/tags");
+    const tags = data.data;
+    this.props.getTags(tags);
+    console.log("data", tags);
+    console.log("this.props", this.props);
+  }
+
   render() {
     return (
       <div className="App">
@@ -36,4 +47,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return { tags: state.tags };
+};
+
+export default connect(
+  mapStateToProps,
+  { getTags }
+)(App);
