@@ -1,5 +1,10 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Switch,
+  Route
+} from "react-router-dom";
 import SecureRoute from "./secureUtils/SecureRoute";
 import Issue from "./components/Issue/Issue";
 import AddIssue from "./components/AddIssue/AddIssue";
@@ -20,7 +25,7 @@ export default (
       path="/"
       render={() => (
         <Home>
-          <SecureRoute path="/dashboard" component={Dashboard} />
+          <Route path="/dashboard" component={Dashboard} />
           <SecureRoute path="/profile" component={Profile} />
         </Home>
       )}
