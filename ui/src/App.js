@@ -1,18 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import "./reset.css";
-
-import 'normalize.css';
-import './App.css';
-import { connect } from 'react-redux';
-import { getTags } from './ducks/reducer';
-import axios from 'axios';
-import NavBar from './components/NavBar/NavBar';
+import { withRouter } from "react-router-dom";
+import "normalize.css";
+import "./App.css";
+import { connect } from "react-redux";
+import { getTags } from "./ducks/reducer";
+import axios from "axios";
+import NavBar from "./components/NavBar/NavBar";
 import jwt_decode from "jwt-decode";
 import store from "./store";
 import setJWTToken from "./secureUtils/setJWTToken";
 import router from "./router";
+// import Routes from "./router";
+import BasicExample from "./routers";
 import { SET_CURRENT_USER } from "./actions/types";
-
 
 const jwtToken = localStorage.jwtToken;
 
@@ -32,7 +33,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    const { data } = await axios.get('http://localhost:8081/tags');
+    const { data } = await axios.get("http://localhost:8081/tags");
     this.props.getTags(data);
     console.log(data);
     console.log(this.props);
@@ -52,7 +53,9 @@ const mapStateToProps = state => {
   return { tags: state.tags };
 };
 
-export default connect(
-  mapStateToProps,
-  { getTags }
-)(App);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { getTags }
+  )(App)
+);
