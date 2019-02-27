@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-// import App from './App';
+import SecureRoute from "./secureUtils/SecureRoute";
 import Issue from "./components/Issue/Issue";
 import AddIssue from "./components/AddIssue/AddIssue";
 import Home from "./components/Home/Home";
@@ -14,13 +14,13 @@ export default (
     <Route path="/signup" component={Register} />
     <Route path="/signin" component={Login} />
     <Route path="/issue" component={Issue} />
-    <Route path="/add-issue" component={AddIssue} />
+    <SecureRoute path="/add-issue" component={AddIssue} />
     <Route
       path="/"
       render={() => (
         <Home>
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/profile" component={Profile} />
+          <SecureRoute path="/dashboard" component={Dashboard} />
+          <SecureRoute path="/profile" component={Profile} />
         </Home>
       )}
     />
