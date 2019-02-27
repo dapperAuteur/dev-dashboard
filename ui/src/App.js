@@ -12,7 +12,6 @@ import store from "./store";
 import setJWTToken from "./secureUtils/setJWTToken";
 import router from "./router";
 // import Routes from "./router";
-import BasicExample from "./routers";
 import { SET_CURRENT_USER } from "./actions/types";
 
 const jwtToken = localStorage.jwtToken;
